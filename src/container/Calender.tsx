@@ -1,25 +1,25 @@
 import React, {useState} from 'react';
 import moment, {Moment} from "moment";
 import clsx from "clsx";
-import {Box, makeStyles, Typography} from "@material-ui/core";
+import {Box, makeStyles, Typography, Divider} from "@material-ui/core";
 
 const useStyles = makeStyles({
     nav: {
         display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "2rem"
     },
     head: {
-        display: "flex", justifyContent: "center", alignItems: "center",
+        display: "flex", justifyContent: "center", alignItems: "center", fontSize: 12,
         width: 35, height: 35, textAlign: "center"
     },
     body: {
-        display: "flex", justifyContent: "center", alignItems: "center",
+        display: "flex", justifyContent: "center", alignItems: "center", fontSize: 12,
         width: 35, height: 35, textAlign: "center"
     },
     bodyFont: {
         fontSize: 9, fontWeight: 300, borderRadius: "100%"
     },
     checkedDay: {
-        backgroundColor: "grey", color: "#ffffff!important", borderRadius: "100%", fontWeight: 500,
+        backgroundColor: "grey", color: "#ffffff!important", borderRadius: "100%", fontWeight: 700,
     },
     saturday: {
         color: "#003C7E"
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
         color: "#c6472b"
     },
     none: {
-        color: "white"
+        visibility: "hidden"
     }
 })
 
@@ -100,9 +100,15 @@ const Calender = () => {
 
     return (
         <Box py={2}>
-            <Box px={1}>
-                <Box className={classes.nav}>
-                    <Typography variant={"h5"}>October</Typography>
+            <Box px={4}>
+                <Box className={classes.nav} display={"flex"} flexDirection={"column"}>
+                    <Typography variant={"body1"} style={{fontWeight: 700}}>10월 31일</Typography>
+                    <Box py={1}>
+                        <Typography variant={"caption"}>일요일 낮 12시 20분</Typography>
+                    </Box>
+                    <Box pt={1} width={"100%"}>
+                        <Divider style={{ width: "100%"}}/>
+                    </Box>
                 </Box>
                 <Box>
                     <Box>
@@ -115,6 +121,10 @@ const Calender = () => {
                             {getDate()}
                         </Box>
                     </Box>
+
+                </Box>
+                <Box pt={5} pb={2}>
+                    <Divider style={{ width: "100%"}}/>
                 </Box>
             </Box>
         </Box>

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Box} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 
 declare global {
     interface Window {
@@ -38,6 +38,10 @@ const Map = (props: mapProps) => {
     }, [kakaoMap]);
     return (
         <>
+            <Box mb={3} display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                <Typography style={{fontWeight: 700}} align={"center"} variant={"body2"}>신도림 테크노마트 웨딩시티 11층 그랜드볼룸</Typography>
+                <Typography align={"center"} variant={"caption"}>서울시 구로구 새말로 97</Typography>
+            </Box>
             <Box px={2}>
                 <div ref={kakaoMap} style={{width: "100%", height: 300}}/>
             </Box>

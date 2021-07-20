@@ -1,43 +1,72 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Dialog, DialogTitle, Grid, TextField, Typography} from "@material-ui/core";
 import {useFormik} from "formik";
 import {PasswordValidation} from "../components/Validation";
+import {useRecoilState} from "recoil";
+import {commentState} from "../atoms/Atom";
 
 interface checkProps {
-    modalPw: {id: string, password: string, open: boolean}
-    handlePwModal: (name:string, id:string|undefined, password: string|undefined) => void
+    modalPw: { id: string, password: string, open: boolean }
+    handlePwModal: (name: string, id: string | undefined, password: string | undefined) => void
 }
 
+const PwCheckModal = (props: checkProps) => {
 
+    const {modalPw: {id, password, open}, handlePwModal} = props
+    const [comments, setComments] = useRecoilState(commentState)
 
-const PwCheckModal = (props:checkProps) => {
-
-    const { modalPw:{ id, password, open }, handlePwModal } = props
+    const deleteHandle = (id: string) => {
+        if (comments.length !== 0) {
+            const changedComments = comments.filter((comment) => comment._id !== id)
+            setComments(changedComments)
+        }
+    }
 
     const formik = useFormik({
         initialValues: {
             password: '',
         },
         validationSchema: PasswordValidation,
-        onSubmit: (values,{resetForm}) => {
-            if(values.password !== password){
+        onSubmit: (values, {resetForm}) => {
+            if (values.password !== password) {
                 alert("비밀번호가 틀렸습니다.")
                 resetForm({})
             } else {
-                alert("비밀 번호 맞음")
+                deleteCommentRequest(id)
+                    .then( res =>{
+                        if(res.success === true){
+                            deleteHandle(id);
+                        } else {
+                            alert("다시 한번 시도해 주세요.")
+                        }
+                    })
+                    .catch( err => {
+                        console.log(err);
+                    })
                 resetForm({})
                 handlePwModal('close', undefined, undefined)
             }
         },
     });
 
-    const { values , touched , errors, handleChange, handleSubmit } = formik
+    const deleteCommentRequest = async (id:any) => {
+        const response = await fetch("/api/comment/delete",{
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({id})
+        });
+        return await response.json()
+    }
+
+    const {values, touched, errors, handleChange, handleSubmit} = formik
 
     return (
         <>
             <Dialog
                 open={open}
-                onClose={()=> {
+                onClose={() => {
                     formik.resetForm({})
                     handlePwModal('close', undefined, undefined)
                 }}
@@ -62,7 +91,7 @@ const PwCheckModal = (props:checkProps) => {
                             />
                         </Grid>
                         <Grid item xs={4}>
-                            <Button fullWidth type={"submit"} color={"primary"} variant={"contained"} >삭제</Button>
+                            <Button fullWidth type={"submit"} color={"primary"} variant={"contained"}>삭제</Button>
                         </Grid>
                     </Grid>
                 </form>

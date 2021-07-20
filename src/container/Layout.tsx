@@ -2,12 +2,12 @@ import React from 'react';
 import {CssBaseline, ThemeProvider} from "@material-ui/core";
 import {useRecoilValue} from "recoil";
 import {themeModeState} from "../atoms/Atom";
-import {createMuiTheme} from "@material-ui/core/styles";
+import {createTheme} from "@material-ui/core/styles";
 
 const Layout = (props:{children: React.ReactNode}) => {
 
     const themeMode = useRecoilValue<boolean>(themeModeState)
-    const light = createMuiTheme({
+    const light = createTheme({
         palette: {
             background: {
                 default: "white"
@@ -19,7 +19,7 @@ const Layout = (props:{children: React.ReactNode}) => {
             ].join(','),
         },
     });
-    const dark = createMuiTheme({
+    const dark = createTheme({
         palette: {
             type: "dark"
         },

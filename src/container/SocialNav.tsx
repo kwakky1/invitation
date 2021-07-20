@@ -3,7 +3,7 @@ import Image from "next/image";
 import tMap from "../../public/img/location_tmap.png";
 import naverMap from "../../public/img/location_navermap.png";
 import kakaoMap from "../../public/img/location_kakaomap.png";
-import {Box} from "@material-ui/core";
+import {Box, Typography} from "@material-ui/core";
 
 interface SocialNavProps {
     address: { title:string , lat: number, lng: number}
@@ -27,10 +27,25 @@ const SocialNav = (props:SocialNavProps) => {
 
     return (
         <>
-            <Box display={"flex"} justifyContent={"space-between"} px={10} py={10}>
-                <Image width={50} height={50} src={tMap} alt="tMap" onClick={(e)=>handleGuide(e, "tMap")}/>
-                <Image width={50} height={50} src={naverMap} alt="naverMap" onClick={(e)=>handleGuide(e, "naverMap")}/>
-                <Image width={50} height={50} src={kakaoMap} alt="kakaoMap" onClick={(e)=>handleGuide(e, "kakaoMap")}/>
+            <Box display={"flex"} justifyContent={"space-between"} px={5} py={5}>
+                <Box display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                    <Box>
+                        <Image width={50} height={50} src={tMap} alt="tMap" onClick={(e)=>handleGuide(e, "tMap")}/>
+                    </Box>
+                    <Typography variant={"caption"} align={"center"}>티맵</Typography>
+                </Box>
+                <Box display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                    <Box>
+                        <Image width={50} height={50} src={naverMap} alt="naverMap" onClick={(e)=>handleGuide(e, "naverMap")}/>
+                    </Box>
+                    <Typography variant={"caption"} align={"center"}>네이버지도</Typography>
+                </Box>
+                <Box display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                    <Box>
+                        <Image width={50} height={50} src={kakaoMap} alt="kakaoMap" onClick={(e)=>handleGuide(e, "kakaoMap")}/>
+                    </Box>
+                    <Typography variant={"caption"} align={"center"}>카카오맵</Typography>
+                </Box>
             </Box>
         </>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Grid, TextField} from "@material-ui/core";
+import {Box, Button, Divider, Grid, TextField, Typography} from "@material-ui/core";
 import {useFormik} from "formik";
 import {Validation} from "../components/Validation";
 import {useRecoilState} from "recoil";
@@ -43,6 +43,12 @@ const WriteComment = () => {
 
     return (
         <>
+            <Box py={5}>
+                <Divider/>
+                <Box mt={2}>
+                    <Typography variant={"body1"} align={"center"}>축하글 남겨주세요</Typography>
+                </Box>
+            </Box>
             <form onSubmit={handleSubmit} style={{padding: "1rem"}}>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
@@ -94,7 +100,7 @@ const WriteComment = () => {
                             variant={"contained"}
                             fullWidth
                         >
-                            보내기
+                            축하글 남기기
                         </Button>
                     </Grid>
                 </Grid>

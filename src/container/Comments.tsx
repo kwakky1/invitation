@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Button, Typography} from '@material-ui/core'
+import React, {useEffect} from 'react';
+import {Box, Divider, Typography} from '@material-ui/core'
 import moment from "moment/moment";
 import {useRecoilState} from "recoil";
 import {commentState} from "../atoms/Atom";
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import Pagination from '@material-ui/lab/Pagination';
 
 export interface commentProps {
     _id: string
@@ -18,51 +20,60 @@ interface commentsProps {
 }
 
 
-const Comments = (props:commentsProps) => {
-    const { handlePwModal } = props
+const Comments = (props: commentsProps) => {
+    const {handlePwModal} = props
 
     const [comments, setComments] = useRecoilState(commentState)
 
-    const deleteHandle = (id: string) => {
-        if(comments.length !== 0){
-            const changedComments = comments.filter((comment) => comment._id !== id)
-            setComments(changedComments)
-        }
-    }
-    useEffect(()=>{
-        fetchCommentsRequest().then((res)=>{
-            setComments(res.comments)
-        }
-        ).catch((err)=>{
+
+    useEffect(() => {
+        fetchCommentsRequest().then((res) => {
+                setComments(res.comments)
+            }
+        ).catch((err) => {
             alert(err.toString());
         })
-    },[])
+    }, [])
 
-    async function fetchCommentsRequest(){
+    async function fetchCommentsRequest() {
         const response = await fetch("/api/comment");
         return await response.json();
+    }
+
+    const handleHeart = (id:string) => {
+
     }
 
     return (
         <Box>
             {
-                comments.length !== 0 &&
-                comments.map((comment, index:number)=>{
-                    const {_id, name, text, date, password } = comment
+                comments !== undefined && comments.length !== 0 &&
+                comments.map((comment, index: number) => {
+                    const {_id, name, text, date, password} = comment
                     return (
-                        <Box key={index}>
+                        <Box key={index} p={2}>
                             <Box display={"flex"} justifyContent={"space-between"}>
-                                <Typography>{name}</Typography>
-                                <Typography>{moment(date).format('YYYY-MM-DD')}</Typography>
-                                <Button onClick={()=>handlePwModal('open', _id, password)}>삭제</Button>
+                                <Typography variant={"body2"} style={{fontWeight: 700}}>{name}</Typography>
+                                <Typography variant={"caption"}>{moment(date).format('YYYY-MM-DD')}</Typography>
                             </Box>
-                            <Box>
-                                {text}
+                            <Box py={2}>
+                                <Box display={"flex"} justifyContent={"space-between"}>
+                                    <Box width={"90%"}>
+                                        <Typography variant={"body2"}>{text}</Typography>
+                                    </Box>
+                                    <FavoriteBorderIcon color={"secondary"} onClick={()=>handleHeart(_id)}/>
+                                    <DeleteIcon style={{color: "gray"}} onClick={() => handlePwModal('open', _id, password)}/>
+                                </Box>
                             </Box>
+                            <Divider/>
+
                         </Box>
                     )
                 })
             }
+            <Box display={"flex"} justifyContent={"center"}>
+                <Pagination count={comments ? comments.length / 5 : 0}/>
+            </Box>
         </Box>
     );
 };

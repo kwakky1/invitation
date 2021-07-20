@@ -1,5 +1,8 @@
 import React, {useEffect} from 'react';
-import {Button} from "@material-ui/core";
+import Image from "next/image";
+import {Box, Button} from "@material-ui/core";
+import kakaoMap from "../../public/img/location_kakaomap.png";
+import kakaoShare from "../../public/img/kakao_share.png";
 
 const KakaoShareBtn = () => {
 
@@ -44,9 +47,12 @@ const KakaoShareBtn = () => {
     }
     return (
         <>
-            <Button id={'kakao-link-btn'} onClick={shareHandle}>
-                카카오 공유하기
-            </Button>
+            <Box p={2}>
+                <Button id={'kakao-link-btn'} fullWidth variant={"contained"} style={{backgroundColor: "yellow" }} onClick={shareHandle}>
+                    <Image width={50} height={40} src={kakaoShare} />
+                    카카오로 공유하기
+                </Button>
+            </Box>
         </>
     );
 };

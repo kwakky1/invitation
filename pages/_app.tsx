@@ -2,12 +2,10 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import '../styles/globals.css'
 import Head from "next/head";
-import {CssBaseline, ThemeProvider} from "@material-ui/core";
-import React, {useEffect, useState} from "react";
+import {CssBaseline} from "@material-ui/core";
+import React, {useEffect} from "react";
 import PropTypes from 'prop-types';
-import {createMuiTheme} from "@material-ui/core/styles";
-import {RecoilRoot, useRecoilValue} from "recoil";
-import {themeModeState} from "../src/atoms/Atom";
+import {RecoilRoot} from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
