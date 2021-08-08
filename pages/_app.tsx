@@ -1,6 +1,8 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import '../styles/globals.css'
+import 'swiper/swiper.scss';
+import "swiper/components/navigation/navigation.min.css"
+import "swiper/components/thumbs/thumbs.min.css"
 import Head from "next/head";
 import {CssBaseline} from "@material-ui/core";
 import React, {useEffect} from "react";
@@ -19,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
       <>
         <Head>
-          <title>My page</title>
+          <title>경열❤️유경 결혼합니다</title>
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         </Head>
           <RecoilRoot>

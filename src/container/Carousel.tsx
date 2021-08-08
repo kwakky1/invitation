@@ -1,72 +1,50 @@
 import React, {useState} from 'react';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Image from 'next/image'
-import img1 from "../../public/img/1.jpeg"
-import img2 from "../../public/img/2.jpeg"
-import img3 from "../../public/img/3.jpeg"
-import img4 from "../../public/img/4.jpeg"
-import img5 from "../../public/img/5.jpeg"
-import img6 from "../../public/img/6.jpeg"
-import img8 from "../../public/img/8.jpeg"
-import {Box} from "@material-ui/core";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Thumbs } from 'swiper';
+import img_1 from '../../public/img/img_1.jpg'
+import img_2 from '../../public/img/img_2.jpg'
+import img_3 from '../../public/img/img_3.jpg'
+import img_4 from '../../public/img/img_4.jpg'
+import img_5 from '../../public/img/img_5.jpg'
+import img_6 from '../../public/img/img_6.jpg'
+import img_7 from '../../public/img/img_7.jpg'
+import img_8 from '../../public/img/img_8.jpg'
 
 const Carousel = () => {
-    const items = [
-        { id: 1, img: img1},
-        { id: 2, img: img2},
-        { id: 3, img: img3},
-        { id: 4, img: img4},
-        { id: 5, img: img5},
-        { id: 6, img: img8},
-    ];
+    SwiperCore.use([Navigation, Thumbs]);
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-    const [nav1, setNav1] = useState<Slider>();
-    const [nav2, setNav2] = useState<Slider>();
+    const image = [img_1, img_2, img_3, img_6, img_4, img_5,  img_7, img_8]
+
+    const imageRender =  image.map((item, index)=>{
+        return  (
+            <SwiperSlide key={`swiper-${index}`}>
+                <Image src={item}/>
+            </SwiperSlide>
+        )
+    })
 
     return (
-        <Box>
-            <Slider
-                asNavFor={nav2}
-                ref={(slider1: Slider) => setNav1(slider1)}
-                fade
-                arrows
+        <>
+            <Swiper
+                slidesPerView={1}
+                navigation
+                thumbs={{ swiper: thumbsSwiper }}
             >
-                {items.map((item) => {
-                    const { id, img } = item;
-                    return (
-                        <Box
-                            key={id}
-                            display={"flex"}
-                        >
-                            <Image src={img} width={"100%"} height={200}/>
-                        </Box>
-                    );
-                })}
-            </Slider>
-            <Slider
-                asNavFor={nav1}
-                ref={(slider2: Slider) => setNav2(slider2)}
-                slidesToShow={3}
-                swipeToSlide
-                focusOnSelect
-                arrows
-                className="arrow_slider"
-            >
-                {items.map((item) => {
-                    const { id, img } = item;
-                    return (
-                        <Box
-                            key={id}
-                            display={"flex"}
-                        >
-                            <Image src={img} />
-                        </Box>
-                    );
-                })}
-            </Slider>
-        </Box>
+                {imageRender}
+            </Swiper>
+            <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={10}
+                slidesPerView={4}
+                freeMode
+                watchSlidesVisibility
+                watchSlidesProgress
+                >
+                {imageRender}
+            </Swiper>
+        </>
     );
 };
 

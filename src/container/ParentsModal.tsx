@@ -50,7 +50,7 @@ const ParentsModal = (props: parentsModalProps) => {
                                 </div>
                             </div>
                             <div style={{height: 170, display: "flex", flexDirection: "column", justifyItems: "center", justifyContent: "space-between"}}>
-                                <Typography style={{color: "#A85353"}} align={"center"}>신부측 혼주</Typography>
+                                <Typography color={"secondary"} align={"center"}>신부측 혼주</Typography>
                                 <div>
                                     <Typography>아버지 위노환</Typography>
                                     <div style={{display: "flex", justifyContent: "space-around", marginTop: 10}}>

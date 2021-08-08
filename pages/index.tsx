@@ -118,7 +118,7 @@ export default function Home() {
                 <Calender/>
                 <Map latitude={address.lat} longitude={address.lng} code={"kakao_map"}/>
                 <SocialNav address={address}/>
-                {/*<Carousel/>*/}
+                <Carousel/>
                 <WriteComment/>
                 <Comments handlePwModal={handlePwModal}/>
                 <PwCheckModal modalPw={modalPw} handlePwModal={handlePwModal}/>

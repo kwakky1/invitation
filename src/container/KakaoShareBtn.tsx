@@ -12,29 +12,24 @@ const KakaoShareBtn = () => {
         }
         (window as any).Kakao.Link.createDefaultButton({
             container: '#kakao-link-btn',
-            objectType: 'feed',
+            objectType: 'location',
+            address: '서울특별시 구로구 새말로 97 신도림테크노마트 11층',
+            addressTitle: '신도림 웨딩시티 그랜드볼룸 11층',
             content: {
                 title: '경열❤️유경 결혼식에 초대합니다.',
-                description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
-                imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+                description: '2021년 10월 31일(일) 낮 12시 20분',
+                imageUrl: 'https://invitation-mu.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Fwedding_1.caee51bdfac7f41c1368e740d4d176c8.jpeg&w=3840&q=75',
                 link: {
-                    mobileWebUrl: 'https://cheonmro.github.io/',
-                    webUrl: 'https://cheonmro.github.io/'
+                    mobileWebUrl: 'https://invitation-mu.vercel.app/',
+                    webUrl: 'https://invitation-mu.vercel.app/'
                 }
             },
             buttons: [
                 {
-                    title: '웹으로 보기',
+                    title: '자세히 보기',
                     link: {
-                        mobileWebUrl: 'https://cheonmro.github.io/',
-                        webUrl: 'https://cheonmro.github.io/'
-                    }
-                },
-                {
-                    title: '앱으로 보기',
-                    link: {
-                        mobileWebUrl: 'https://cheonmro.github.io/',
-                        webUrl: 'https://cheonmro.github.io/'
+                        mobileWebUrl: 'https://invitation-mu.vercel.app/',
+                        webUrl: 'https://invitation-mu.vercel.app/'
                     }
                 }
             ]

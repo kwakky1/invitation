@@ -21,7 +21,13 @@ const Layout = (props:{children: React.ReactNode}) => {
     });
     const dark = createTheme({
         palette: {
-            type: "dark"
+            type: "dark",
+            primary:{
+                main: '#90caf9'
+            },
+            secondary:{
+                main: '#f48fb1'
+            }
         },
         typography: {
             fontFamily: [

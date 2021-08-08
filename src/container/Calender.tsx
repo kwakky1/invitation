@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import moment, {Moment} from "moment";
 import clsx from "clsx";
 import {Box, makeStyles, Typography, Divider} from "@material-ui/core";
+import {useRecoilValue} from "recoil";
+import {themeModeState} from "../atoms/Atom";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme=>({
     nav: {
         display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "2rem"
     },
@@ -22,22 +24,22 @@ const useStyles = makeStyles({
         backgroundColor: "grey", color: "#ffffff!important", borderRadius: "100%", fontWeight: 700,
     },
     saturday: {
-        color: "#003C7E"
+        color: ({check}:any)=> check ? "#90caf9" : "#003C7E"
     },
     sunday: {
-        color: "#c6472b"
+        color: ({check}:any)=> check ? "#f48fb1" : "#c6472b"
     },
     none: {
         visibility: "hidden"
     }
-})
+}))
 
 
 const Calender = () => {
 
     const [today] = useState<Moment>(moment('2021-10-31'));
-
-    const classes = useStyles()
+    const themeMode = useRecoilValue<boolean>(themeModeState)
+    const classes = useStyles({check: themeMode})
 
     const getDate = () => {
 

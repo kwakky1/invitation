@@ -20,3 +20,12 @@ a {
   font-style: normal;
   src: url('../public/fonts/old-studio4.ttf');
 }
+
+.swiper-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+:root {
+  --swiper-theme-color: darkgrey !important;
+}
