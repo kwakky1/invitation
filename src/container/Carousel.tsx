@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Thumbs } from 'swiper';
+import SwiperClass from 'swiper/types/swiper-class';
 import img_1 from '../../public/img/img_1.jpg'
 import img_2 from '../../public/img/img_2.jpg'
 import img_3 from '../../public/img/img_3.jpg'
@@ -13,7 +14,7 @@ import img_8 from '../../public/img/img_8.jpg'
 
 const Carousel = () => {
     SwiperCore.use([Navigation, Thumbs]);
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass>();
 
     const image = [img_1, img_2, img_3, img_6, img_4, img_5,  img_7, img_8]
 
