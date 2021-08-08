@@ -1,5 +1,5 @@
 import React from 'react';
-import {Fade, makeStyles, Modal, Paper, Typography} from "@material-ui/core";
+import {Dialog, Fade, makeStyles, Paper, Typography} from "@material-ui/core";
 import CallIcon from "@material-ui/icons/Call";
 import MessageIcon from "@material-ui/icons/Message";
 
@@ -11,9 +11,9 @@ interface parentsModalProps {
 
 const useStyles = makeStyles({
     modalWrapper : {
-        width: "80%",
+        width: 300,
         '@media(min-width: 768px)' : {
-            width: '40%'
+            width: 400
         }
     }
 })
@@ -23,7 +23,7 @@ const ParentsModal = (props: parentsModalProps) => {
     const classes = useStyles();
     return (
         <>
-            <Modal
+            <Dialog
                 open={modal}
                 onClose={()=>handleModal("close")}
                 style={{display: "flex", justifyContent: "center", alignItems: "center"}}
@@ -69,7 +69,7 @@ const ParentsModal = (props: parentsModalProps) => {
                         </div>
                     </Paper>
                 </Fade>
-            </Modal>
+            </Dialog>
         </>
     );
 };

@@ -67,6 +67,7 @@ export default function Home() {
                         <Audio/>
                         <Box display={"flex"} alignItems={"center"}>
                             <FormControlLabel
+                                style={{color: themeMode ? 'grey' : 'black'}}
                                 control={
                                     <Switch
                                         checked={themeMode}
