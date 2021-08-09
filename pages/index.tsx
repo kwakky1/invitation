@@ -1,5 +1,5 @@
-import { useState } from "react";
-import {AppBar, Box, Button, Container, FormControlLabel, Switch, Toolbar, Typography} from "@material-ui/core";
+import {useEffect, useRef, useState} from "react";
+import {AppBar, Box, Button, Container, FormControlLabel, Grow, Switch, Typography} from "@material-ui/core";
 import Image from 'next/image'
 import WriteComment from "../src/container/WriteComment";
 import {useRecoilState} from "recoil";
@@ -16,7 +16,7 @@ import Comments from "../src/container/Comments"
 import KakaoShareBtn from "../src/container/KakaoShareBtn";
 import Carousel from "../src/container/Carousel";
 import Audio from "../src/container/Audio";
-
+import {useScroll} from "../src/components/useScroll";
 
 interface modalPwProps {
     id: string
@@ -28,8 +28,30 @@ export default function Home() {
 
     const [themeMode, setThemeMode] = useRecoilState<boolean>(themeModeState)
 
+    useEffect(()=>{
+        if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+            setThemeMode(true)
+        }
+    },[])
+
     const [modal, setModal] = useState<boolean>(false)
     const [modalPw, setModalPw] = useState<modalPwProps>({id:'', password:'', open: false})
+
+    const [check, setCheck] = useState<boolean>(false);
+    const { scrollY } = useScroll();
+    const introText = useRef<HTMLDivElement>(null);
+
+    useEffect(()=>{
+        if(introText.current !== null) {
+            const viewHeight = window.innerHeight // 뷰의 높이
+            const height = introText.current.offsetHeight // 해당 엘리먼트의 높이
+            const top = introText.current.offsetTop // element 윗부분 위치
+            const tf = (top < (viewHeight + scrollY) && (top > (scrollY - height)))
+            if(tf && !check) {
+                setCheck(true)
+            }
+        }
+    },[scrollY])
 
     const handleModal = (name:string) => {
         if(name === 'open'){
@@ -86,16 +108,20 @@ export default function Home() {
                     <Typography style={{color: "black"}} variant={"subtitle2"}>2021년 10월 31일 일요일 낮 12시 20분</Typography>
                 </Box>
                 <Image src={firstImage}/>
-                <Box py={5}>
-                    <Typography  variant={"h6"} align={"center"}>Invitation</Typography>
-                </Box>
-                <Typography variant={"body2"} align={"center"} component={"div"} style={{lineHeight: 2}}>
-                    함께 풍<strong style={{fontSize: 17, fontWeight: 700}}>경</strong>을 만들어갈 사람을 만났습니다. <br/>
-                    그 누구보다도 <strong style={{fontSize: 17, fontWeight: 700}}>열</strong>심히 사랑하며 <br/>
-                    서로 삶의 이<strong style={{fontSize: 17, fontWeight: 700}}>유</strong>가 되어 주겠습니다. <br/>
-                    저희가 내딛는 풍<strong style={{fontSize: 17, fontWeight: 700}}>경</strong>의 첫걸음을 <br/>
-                    축하해 주시면 더없는 기쁨으로 간직하겠습니다.
-                </Typography>
+                <Grow in={check} timeout={{appear: 5000, enter: 3000, exit: 1000}} ref={introText}>
+                    <Box>
+                        <Box py={5}>
+                            <Typography  variant={"h6"} align={"center"}>Invitation</Typography>
+                        </Box>
+                        <Typography variant={"body2"} align={"center"} component={"div"} style={{lineHeight: 2}}>
+                            함께 풍<strong style={{fontSize: 17, fontWeight: 700}}>경</strong>을 만들어갈 사람을 만났습니다. <br/>
+                            그 누구보다도 <strong style={{fontSize: 17, fontWeight: 700}}>열</strong>심히 사랑하며 <br/>
+                            서로 삶의 이<strong style={{fontSize: 17, fontWeight: 700}}>유</strong>가 되어 주겠습니다. <br/>
+                            저희가 내딛는 풍<strong style={{fontSize: 17, fontWeight: 700}}>경</strong>의 첫걸음을 <br/>
+                            축하해 주시면 더없는 기쁨으로 간직하겠습니다.
+                        </Typography>
+                    </Box>
+                </Grow>
                 <Box display={"flex"} flexDirection={"column"} alignItems={"center"} mt={10} mb={5}>
                     <Box display={"flex"} alignItems={"center"}>
                         <Typography variant={"body1"}>

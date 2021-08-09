@@ -32,6 +32,7 @@ const Carousel = () => {
                 slidesPerView={1}
                 navigation
                 thumbs={{ swiper: thumbsSwiper }}
+                loop
             >
                 {imageRender}
             </Swiper>
