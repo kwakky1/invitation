@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, Divider, Typography} from '@material-ui/core'
 import moment from "moment/moment";
 import {useRecoilState} from "recoil";
 import {commentState} from "../atoms/Atom";
 import DeleteIcon from '@material-ui/icons/Delete';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import Pagination from '@material-ui/lab/Pagination';
 
 export interface commentProps {
@@ -24,24 +23,27 @@ const Comments = (props: commentsProps) => {
     const {handlePwModal} = props
 
     const [comments, setComments] = useRecoilState(commentState)
-
+    const [page, setPage] = useState<number>(1);
+    const [count, setCount] = useState<number>(0);
 
     useEffect(() => {
         fetchCommentsRequest().then((res) => {
-                setComments(res.comments)
-            }
-        ).catch((err) => {
-            alert(err.toString());
+            setComments(res.comments)
+            setCount(res.count)
+        }).catch((err) => {
+            console.log(err.toString());
         })
-    }, [])
+    }, [page])
 
     async function fetchCommentsRequest() {
-        const response = await fetch("/api/comment");
+        const response = await fetch("/api/comment",{
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({page: page, size: 5 } )
+        });
         return await response.json();
-    }
-
-    const handleHeart = (id:string) => {
-
     }
 
     return (
@@ -61,7 +63,6 @@ const Comments = (props: commentsProps) => {
                                     <Box width={"90%"}>
                                         <Typography variant={"body2"}>{text}</Typography>
                                     </Box>
-                                    <FavoriteBorderIcon color={"secondary"} onClick={()=>handleHeart(_id)}/>
                                     <DeleteIcon style={{color: "gray"}} onClick={() => handlePwModal('open', _id, password)}/>
                                 </Box>
                             </Box>
@@ -72,7 +73,7 @@ const Comments = (props: commentsProps) => {
                 })
             }
             <Box display={"flex"} justifyContent={"center"}>
-                <Pagination count={comments ? comments.length / 5 : 0}/>
+                <Pagination count={count % 5 > 0 ? parseInt(String(count / 5)) + 1 : count / 5} page={page} onChange={(event, page)=>setPage(page)} size={"small"}/>
             </Box>
         </Box>
     );
