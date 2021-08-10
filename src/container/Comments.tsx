@@ -73,7 +73,7 @@ const Comments = (props: commentsProps) => {
                 })
             }
             <Box display={"flex"} justifyContent={"center"}>
-                <Pagination count={count % 5 > 0 ? parseInt(String(count / 5)) + 1 : count / 5} page={page} onChange={(event, page)=>setPage(page)} size={"small"}/>
+                <Pagination count={count % 5 > 0 ? parseInt(String(count / 5)) + 1 : count / 5} page={page} onChange={(event, page)=>setPage(page)} size={"large"}/>
             </Box>
         </Box>
     );
