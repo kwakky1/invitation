@@ -19,8 +19,13 @@ const useStyles = makeStyles({
 })
 
 const ParentsModal = (props: parentsModalProps) => {
-    const { modal, handleModal } = props
+    const { modal, handleModal, tel } = props
     const classes = useStyles();
+
+    const sms = (phoneNum:string) => {
+        document.location.href = `sms: ${phoneNum}`
+    }
+
     return (
         <>
             <Dialog
@@ -37,15 +42,15 @@ const ParentsModal = (props: parentsModalProps) => {
                                 <div>
                                     <Typography>아버지 곽의영</Typography>
                                     <div style={{display: "flex", justifyContent: "space-around", marginTop: 10}}>
-                                        <CallIcon/>
-                                        <MessageIcon/>
+                                        <CallIcon onClick={()=>tel("010-3208-6550")}/>
+                                        <MessageIcon onClick={()=>sms("010-3208-6550")}/>
                                     </div>
                                 </div>
                                 <div>
                                     <Typography>어머니 김남애</Typography>
                                     <div style={{display: "flex", justifyContent: "space-around", marginTop: 10}}>
-                                        <CallIcon/>
-                                        <MessageIcon/>
+                                        <CallIcon onClick={()=>tel("010-3325-6550")}/>
+                                        <MessageIcon onClick={()=>sms("010-3325-6550")}/>
                                     </div>
                                 </div>
                             </div>
@@ -54,15 +59,15 @@ const ParentsModal = (props: parentsModalProps) => {
                                 <div>
                                     <Typography>아버지 위노환</Typography>
                                     <div style={{display: "flex", justifyContent: "space-around", marginTop: 10}}>
-                                        <CallIcon/>
-                                        <MessageIcon/>
+                                        <CallIcon onClick={()=>tel("010-9132-4618")}/>
+                                        <MessageIcon onClick={()=>sms("010-9132-4618")}/>
                                     </div>
                                 </div>
                                 <div>
                                     <Typography>어머니 이하영</Typography>
                                     <div style={{display: "flex", justifyContent: "space-around", marginTop: 10}}>
-                                        <CallIcon/>
-                                        <MessageIcon/>
+                                        <CallIcon onClick={()=>tel("010-2412-6228")}/>
+                                        <MessageIcon onClick={()=>sms("010-2412-6228")}/>
                                     </div>
                                 </div>
                             </div>
