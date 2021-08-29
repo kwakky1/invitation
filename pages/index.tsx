@@ -6,6 +6,7 @@ import {useRecoilState} from "recoil";
 import {themeModeState} from "../src/atoms/Atom";
 import Layout from "../src/container/Layout";
 import firstImage from "../public/img/wedding_1.jpeg"
+import emoticon from "../public/img/emoticon.png"
 import Calender from "../src/container/Calender";
 import ParentsModal from "../src/container/ParentsModal";
 import Map from "../src/container/Map"
@@ -123,6 +124,9 @@ export default function Home() {
                     </Box>
                 </Grow>
                 <Box display={"flex"} flexDirection={"column"} alignItems={"center"} mt={10} mb={5}>
+                    <Box display={"flex"} justifyContent={"center"} width={100} mb={2}>
+                        <Image src={emoticon}/>
+                    </Box>
                     <Box display={"flex"} alignItems={"center"}>
                         <Typography variant={"body1"}>
                             곽의영·김남애의 장남 <strong style={{fontWeight: "bold", fontSize:18}}>경열</strong>

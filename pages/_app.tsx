@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
           <title>경열❤️유경 결혼합니다</title>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+            <link rel="shortcut icon" href="../public/icon.ico" />
         </Head>
           <RecoilRoot>
               {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
