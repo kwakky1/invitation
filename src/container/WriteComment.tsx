@@ -20,7 +20,7 @@ const WriteComment = () => {
         onSubmit: (values,{resetForm}) => {
             resetForm({})
             createCommentRequest(values).then((res)=>{
-                setComments([...comments, res.comment])
+                setComments([...comments, res.comment ])
             })
             .catch(errors=>{
                 alert(errors.toString())
