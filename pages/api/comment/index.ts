@@ -9,7 +9,7 @@ export default async function (req:NextApiRequest, res:NextApiResponse){
         if(!size) size = 5;
         const limit = parseInt(size);
         const skip = (parseInt(page) - 1) * size
-        const comments = await db.collection("message").find().limit(limit).skip(skip).toArray();
+        const comments = await db.collection("message").find().sort( { "_id": -1 } ).limit(limit).skip(skip).toArray();
         const count = await db.collection("message").find().toArray()
         res.status(201);
         res.json({comments: comments, count: count.length})

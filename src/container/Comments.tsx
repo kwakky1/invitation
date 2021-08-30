@@ -50,7 +50,7 @@ const Comments = (props: commentsProps) => {
         <Box>
             {
                 comments !== undefined && comments.length !== 0 &&
-                comments.slice(0).reverse().map((comment, index: number) => {
+                comments.map((comment, index: number) => {
                     const {_id, name, text, date, password} = comment
                     return (
                         <Box key={index} p={2}>
