@@ -23,7 +23,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
           <title>경열❤️유경 결혼합니다</title>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-            <link rel="shortcut icon" href="../public/icon.ico" />
+            <meta property="og:url" content="https://invitation-beta.vercel.app/" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="경열❤️유경 결혼식에 초대합니다." />
+            <meta property="og:description" content="2021년 10월 31일(일) 낮 12시 20분" />
+            <meta property="og:image" content="https://invitation-beta.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Fwedding_1.caee51bdfac7f41c1368e740d4d176c8.jpeg&w=3840&q=75" />
         </Head>
           <RecoilRoot>
               {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

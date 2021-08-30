@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
                         src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services`}
                     />
                     <script src="//developers.kakao.com/sdk/js/kakao.min.js"/>
+                    <link rel="shortcut icon" href="/icon.ico" />
                 </Head>
                 <body>
                 <Main />

@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import Image from "next/image";
 import {Box, Button} from "@material-ui/core";
-import kakaoMap from "../../public/img/location_kakaomap.png";
 import kakaoShare from "../../public/img/kakao_share.png";
 
 const KakaoShareBtn = () => {
@@ -18,18 +17,18 @@ const KakaoShareBtn = () => {
             content: {
                 title: '경열❤️유경 결혼식에 초대합니다.',
                 description: '2021년 10월 31일(일) 낮 12시 20분',
-                imageUrl: 'https://invitation-mu.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Fwedding_1.caee51bdfac7f41c1368e740d4d176c8.jpeg&w=3840&q=75',
+                imageUrl: 'https://invitation-beta.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Fwedding_1.caee51bdfac7f41c1368e740d4d176c8.jpeg&w=3840&q=75',
                 link: {
-                    mobileWebUrl: 'https://invitation-mu.vercel.app/',
-                    webUrl: 'https://invitation-mu.vercel.app/'
+                    mobileWebUrl: 'https://invitation-beta.vercel.app/',
+                    webUrl: 'https://invitation-beta.vercel.app/'
                 }
             },
             buttons: [
                 {
                     title: '자세히 보기',
                     link: {
-                        mobileWebUrl: 'https://invitation-mu.vercel.app/',
-                        webUrl: 'https://invitation-mu.vercel.app/'
+                        mobileWebUrl: 'https://invitation-beta.vercel.app/',
+                        webUrl: 'https://invitation-beta.vercel.app/'
                     }
                 }
             ]
