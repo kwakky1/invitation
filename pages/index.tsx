@@ -18,6 +18,8 @@ import KakaoShareBtn from "../src/container/KakaoShareBtn";
 import Carousel from "../src/container/Carousel";
 import Audio from "../src/container/Audio";
 import {useScroll} from "../src/components/useScroll";
+import UpdatePwModal from "../src/container/UpdatePwModal";
+import UpdateModal from "../src/container/UpdateModal";
 
 interface modalPwProps {
     id: string
@@ -153,6 +155,8 @@ export default function Home() {
                 <WriteComment/>
                 <Comments handlePwModal={handlePwModal}/>
                 <PwCheckModal modalPw={modalPw} handlePwModal={handlePwModal}/>
+                <UpdatePwModal/>
+                <UpdateModal/>
                 <KakaoShareBtn/>
             </Container>
         </Layout>

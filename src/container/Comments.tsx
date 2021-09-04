@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Chip, Divider, Typography} from '@material-ui/core'
 import moment from "moment/moment";
-import {useRecoilState} from "recoil";
-import {commentState} from "../atoms/Atom";
+import {useRecoilState, useSetRecoilState} from "recoil";
+import {commentState, pageState, selectedCommentState, updatePwModalState} from "../atoms/Atom";
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import Pagination from '@material-ui/lab/Pagination';
 import TagFacesIcon from '@material-ui/icons/TagFaces';
+import UpdatePwModal from "./UpdatePwModal";
 
 export interface commentProps {
     _id: string
@@ -24,7 +26,9 @@ const Comments = (props: commentsProps) => {
     const {handlePwModal} = props
 
     const [comments, setComments] = useRecoilState(commentState)
-    const [page, setPage] = useState<number>(1);
+    const setUpdatePwOpen = useSetRecoilState(updatePwModalState);
+    const setSelectedComment = useSetRecoilState(selectedCommentState);
+    const [page, setPage] = useRecoilState(pageState);
     const [count, setCount] = useState<number>(0);
 
     useEffect(() => {
@@ -45,6 +49,11 @@ const Comments = (props: commentsProps) => {
             body: JSON.stringify({page: page, size: 5 } )
         });
         return await response.json();
+    }
+
+    const handleUpdateModal = (comment:commentProps) => {
+        setSelectedComment(comment)
+        setUpdatePwOpen(true)
     }
 
     return (
@@ -69,11 +78,11 @@ const Comments = (props: commentsProps) => {
                                     <Box width={"90%"}>
                                         <Typography variant={"body2"}>{text}</Typography>
                                     </Box>
+                                    <EditIcon style={{color: "gray"}} onClick={()=>handleUpdateModal(comment)}/>
                                     <DeleteIcon style={{color: "gray"}} onClick={() => handlePwModal('open', _id, password)}/>
                                 </Box>
                             </Box>
                             <Divider/>
-
                         </Box>
                     )
                 })
@@ -81,6 +90,7 @@ const Comments = (props: commentsProps) => {
             <Box display={"flex"} justifyContent={"center"}>
                 <Pagination count={count % 5 > 0 ? parseInt(String(count / 5)) + 1 : count / 5} page={page} onChange={(event, page)=>setPage(page)} size={"large"}/>
             </Box>
+
         </Box>
     );
 };
