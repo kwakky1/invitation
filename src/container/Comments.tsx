@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Divider, Typography} from '@material-ui/core'
+import {Box, Chip, Divider, Typography} from '@material-ui/core'
 import moment from "moment/moment";
 import {useRecoilState} from "recoil";
 import {commentState} from "../atoms/Atom";
 import DeleteIcon from '@material-ui/icons/Delete';
 import Pagination from '@material-ui/lab/Pagination';
+import TagFacesIcon from '@material-ui/icons/TagFaces';
 
 export interface commentProps {
     _id: string
@@ -55,7 +56,12 @@ const Comments = (props: commentsProps) => {
                     return (
                         <Box key={index} p={2}>
                             <Box display={"flex"} justifyContent={"space-between"}>
-                                <Typography variant={"body2"} style={{fontWeight: 700}}>{name}</Typography>
+                                <Chip
+                                    icon={<TagFacesIcon />}
+                                    label={name}
+                                    color="primary"
+                                    variant={"outlined"}
+                                />
                                 <Typography variant={"caption"}>{moment(date).format('YYYY-MM-DD')}</Typography>
                             </Box>
                             <Box py={2}>
