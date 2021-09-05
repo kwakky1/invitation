@@ -6,7 +6,7 @@ import {UpdateValidation} from "../components/Validation";
 import {Button, Dialog, DialogTitle, Grid, TextField, Typography} from "@material-ui/core";
 
 const UpdateModal = () => {
-    const [selectedComment, setSelectedComment] = useRecoilState(selectedCommentState)
+    const [selectedComment] = useRecoilState(selectedCommentState)
     const [updateOpen, setUpdateOpen] = useRecoilState(updateModalState);
     const setComments = useSetRecoilState(commentState)
     const [page] = useRecoilState(pageState);

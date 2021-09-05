@@ -2,12 +2,14 @@ import React from 'react';
 import {Box, Button, Divider, Grid, TextField, Typography} from "@material-ui/core";
 import {useFormik} from "formik";
 import {Validation} from "../components/Validation";
-import {useRecoilState} from "recoil";
-import {commentState} from "../atoms/Atom";
+import {useRecoilState, useSetRecoilState} from "recoil";
+import {commentState, countState, pageState} from "../atoms/Atom";
 
 const WriteComment = () => {
 
-    const [comments, setComments] = useRecoilState(commentState)
+    const setComments = useSetRecoilState(commentState)
+    const [page] = useRecoilState(pageState);
+    const setCount = useSetRecoilState(countState)
 
     const formik = useFormik({
         initialValues: {
@@ -20,13 +22,31 @@ const WriteComment = () => {
         onSubmit: (values,{resetForm}) => {
             resetForm({})
             createCommentRequest(values).then((res)=>{
-                setComments([ res.comment, ...comments ])
+                if(res.comment){
+                    fetchCommentsRequest().then(res=>{
+                        setComments(res.comments)
+                        setCount(res.count)
+                    }).catch(err=>{
+                        console.log(err.toString());
+                    })
+                }
             })
             .catch(errors=>{
                 alert(errors.toString())
             })
         },
     });
+
+    async function fetchCommentsRequest() {
+        const response = await fetch("/api/comment",{
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({page: page, size: 5 } )
+        });
+        return await response.json();
+    }
 
     const createCommentRequest = async (values:any) => {
         const response = await fetch("/api/comment/create",{

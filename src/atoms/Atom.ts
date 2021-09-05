@@ -16,6 +16,11 @@ export const pageState = atom<number>({
     default: 1,
 })
 
+export const countState = atom<number>({
+    key: 'countState',
+    default: 0,
+})
+
 export const updatePwModalState = atom<boolean>({
     key: 'updatePwModalState',
     default: false,

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Box, Chip, Divider, Typography} from '@material-ui/core'
 import moment from "moment/moment";
 import {useRecoilState, useSetRecoilState} from "recoil";
-import {commentState, pageState, selectedCommentState, updatePwModalState} from "../atoms/Atom";
+import {commentState, countState, pageState, selectedCommentState, updatePwModalState} from "../atoms/Atom";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Pagination from '@material-ui/lab/Pagination';
@@ -29,7 +29,7 @@ const Comments = (props: commentsProps) => {
     const setUpdatePwOpen = useSetRecoilState(updatePwModalState);
     const setSelectedComment = useSetRecoilState(selectedCommentState);
     const [page, setPage] = useRecoilState(pageState);
-    const [count, setCount] = useState<number>(0);
+    const [count, setCount] = useRecoilState(countState);
 
     useEffect(() => {
         fetchCommentsRequest().then((res) => {

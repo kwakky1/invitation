@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {Button, Dialog, DialogTitle, Grid, TextField, Typography} from "@material-ui/core";
 import {useFormik} from "formik";
 import {PasswordValidation} from "../components/Validation";
-import {useRecoilState} from "recoil";
-import {commentState} from "../atoms/Atom";
+import {useRecoilState, useSetRecoilState} from "recoil";
+import {commentState, countState, pageState} from "../atoms/Atom";
 
 interface checkProps {
     modalPw: { id: string, password: string, open: boolean }
@@ -13,14 +13,9 @@ interface checkProps {
 const PwCheckModal = (props: checkProps) => {
 
     const {modalPw: {id, password, open}, handlePwModal} = props
-    const [comments, setComments] = useRecoilState(commentState)
-
-    const deleteHandle = (id: string) => {
-        if (comments.length !== 0) {
-            const changedComments = comments.filter((comment) => comment._id !== id)
-            setComments(changedComments)
-        }
-    }
+    const setComments = useSetRecoilState(commentState);
+    const [page] = useRecoilState(pageState);
+    const setCount = useSetRecoilState(countState);
 
     const formik = useFormik({
         initialValues: {
@@ -35,7 +30,12 @@ const PwCheckModal = (props: checkProps) => {
                 deleteCommentRequest(id)
                     .then( res =>{
                         if(res.success === true){
-                            deleteHandle(id);
+                            fetchCommentsRequest().then(res=>{
+                                setComments(res.comments)
+                                setCount(res.count)
+                            }).catch(err=>{
+                                console.log(err.toString());
+                            })
                         } else {
                             alert("다시 한번 시도해 주세요.")
                         }
@@ -48,6 +48,17 @@ const PwCheckModal = (props: checkProps) => {
             }
         },
     });
+
+    async function fetchCommentsRequest() {
+        const response = await fetch("/api/comment",{
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({page: page, size: 5 } )
+        });
+        return await response.json();
+    }
 
     const deleteCommentRequest = async (id:any) => {
         const response = await fetch("/api/comment/delete",{

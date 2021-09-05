@@ -12,7 +12,7 @@ const UpdatePwModal = () => {
     const setUpdateOpen = useSetRecoilState(updateModalState);
 
 
-    const {_id, name, password, text, date} = selectedComment
+    const { password } = selectedComment
 
     const formik = useFormik({
         initialValues: {
